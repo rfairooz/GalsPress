@@ -1,8 +1,12 @@
 import React from 'react'
 import Landing from '@/components/Landing'
+import WordCloudComponent from '@/components/Word'
 const page = () => {
   return (
-    <div><Landing /></div>
+     <div>
+      {/* //<Landing /> */}
+    { <WordCloudComponent/> }
+    </div>
   )
 }
 
