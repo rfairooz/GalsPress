@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@firebase/firestore": "^4.4.1",
     "bootstrap": "^5.3.2",
     "firebase": "^10.7.2",
     "font-awesome": "^4.7.0",
