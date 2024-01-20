@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["GalsPress/src/*"]
+      "@/*": ["./src/*"]
     }
   }
 }
