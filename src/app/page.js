@@ -1,8 +1,8 @@
 import React from 'react'
-
+import Landing from '@/components/Landing'
 const page = () => {
   return (
-    <div>GalsPress - where gals discuss pressing matters in the society!</div>
+    <div><Landing /></div>
   )
 }
 
