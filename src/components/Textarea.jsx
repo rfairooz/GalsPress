@@ -35,12 +35,14 @@ const Textarea = () => {
         name={"Womp Womp"}
         placeholder={"Paste Text Here"}
       />
+      <div className="flex justify-end">
         <button
-          className=" bg-[#051A3B] absolute hover:bg-[#051A3B]/70 text-white font-bold py-3 px-3 rounded-full mt-2"
+          className="mr-4 bg-[#051A3B] absolute hover:bg-[#051A3B]/70 text-white font-bold py-3 px-3 rounded-full mt-2.5"
           onClick={handleSubmit}
         >
           <FaSearch className='text-2xl'/>
         </button>
+        </div>
     </div>
   );
 };
