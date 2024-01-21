@@ -1,14 +1,22 @@
+"use client"
+import React from 'react'
+import { useState } from 'react';
+import Textarea from './Textarea';
+import MyWordCloud from '@/data/word-cloud'; 
 
 const Results = () => {
-    return (
-<div className="flex flex-col">
-    Results
-    <div>
-        WOOOOO
-    </div>
-</div>
-    );
+  const [submittedText, setSubmittedText] = useState('');
 
+  const handleTextSubmit = (text) => {
+    setSubmittedText(text);
+  };
+
+  return (
+    <div>
+      <Textarea onTextSubmit={handleTextSubmit} />
+      <MyWordCloud submittedText={submittedText} /> 
+    </div>
+  );
 };
 
-export default Results
+export default Results;
