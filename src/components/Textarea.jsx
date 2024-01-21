@@ -27,7 +27,11 @@ const Textarea = () => {
   };
 
   return (
-    <div className="w-full flex flex-row justify-center">
+    <div className="w-full flex flex-col justify-center">
+      <div className='flex justify-center items-center text-white text-center text-xl rounded-xl bg-black w-3/5 ml-24 h-10'>
+        Add text to discover the results 
+      </div>
+      <div className='flex flex-row mt-2'>
       <textarea
         value={text}
         onChange={handleChange}
@@ -43,6 +47,7 @@ const Textarea = () => {
         >
           <FaSearch className='text-2xl'/>
         </button>
+        </div>
         </div>
     </div>
   );
