@@ -12,6 +12,37 @@ const Textarea = ({ onTextSubmit, onbiasScore }) => {
     setText(event.target.value);
   };
 
+  async function sendAndFetchData(dataToSend) {
+    // try {
+      // Sending data 
+      const sendResponse = await fetch('https://e8a0-34-148-254-180.ngrok-free.app/run-script', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      if (!sendResponse.ok) {
+        throw new Error('Error sending data');
+      }
+      console.log('Data being sent to Flask server:', dataToSend);
+      console.log(sendResponse);
+
+      // Fetching response
+    //   const fetchResponse = await fetch('http://172.28.0.12:5000/');
+
+    //   if (!fetchResponse.ok) {
+    //     throw new Error('Error fetching data');
+    //   }
+
+    //   const responseData = await fetchResponse.json();
+    //   console.log('Response from Flask server:', responseData);
+    // } catch (error) {
+    //   console.error('Error:', error.message);
+    // }
+  }
+
   const handleSubmit = async () => {
     if (text.trim() !== '') {
       try {
