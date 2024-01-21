@@ -1,22 +1,22 @@
-import { map } from "d3";
-import { items } from "@/data/words";
+"use client"
+import React from 'react'
+import { useState } from 'react';
+import Textarea from './Textarea';
+import MyWordCloud from '@/data/word-cloud'; 
+
 const Results = () => {
+  const [submittedText, setSubmittedText] = useState('');
 
-    return (
-<div className="w-full h-screen flex justify-center bg-[#051A3B] text-white ">
-    <div className="flex flex-col">
-        <p className="text-6xl mt-3">  RESULTS</p>
+  const handleTextSubmit = (text) => {
+    setSubmittedText(text);
+  };
 
-
-    {items.map((item, index) => (
-          <div
-            key={index}
-          >{item.name}</div>
-        ))}
+  return (
+    <div>
+      <Textarea onTextSubmit={handleTextSubmit} />
+      <MyWordCloud submittedText={submittedText} /> 
     </div>
-</div>
-    );
-
+  );
 };
 
-export default Results
+export default Results;

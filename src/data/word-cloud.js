@@ -1,71 +1,81 @@
-// WordCloud.js
 "use client"
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import cloud from 'd3-cloud';
 
-const MyWordCloud = () => {
-  const myWords = [
-    { word: 'Running', size: '10' },
-    { word: 'Surfing', size: '20' },
-    { word: 'Climbing', size: '50' },
-    { word: 'Kiting', size: '30' },
-    { word: 'Sailing', size: '20' },
-    { word: 'Snowboarding', size: '60' },
-  ];
-
+const MyWordCloud = ({ submittedText }) => {
+  const [myWords, setMyWords] = useState([]);
   const svgRef = useRef();
 
+  // Function to process the submitted text into a format for the word cloud
+  // const processTextData = (text) => {
+  //   const wordCounts = {};
+  //   text.split(/\s+/).forEach(word => {
+  //     word = word.toLowerCase();
+  //     wordCounts[word] = (wordCounts[word] || 0) + 1;
+  //   });
+  //   return Object.keys(wordCounts).map(word => ({ text: word, size: wordCounts[word] * 10 })); // Adjust size as needed
+  // };
+  const processTextData = (text) => {
+    const wordCounts = {};
+    // Split text into words, remove punctuation, and iterate over words
+    text.split(/\s+/).forEach(word => {
+      // Remove punctuation from each word
+      word = word.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
+      // Count words
+      wordCounts[word] = (wordCounts[word] || 0) + 1;
+    });
+    // Map word counts to desired format
+    return Object.keys(wordCounts).map(word => ({ text: word, size: wordCounts[word] * 10 })); // Adjust size as needed
+  };
+
   useEffect(() => {
-    if (!svgRef.current) {
-      // Set the dimensions and margins of the graph
+    if (submittedText) {
+      const processedData = processTextData(submittedText);
+      setMyWords(processedData); // Update the state with the processed words
+    }
+  }, [submittedText]);
+
+  useEffect(() => {
+    if (myWords.length > 0) {
+      d3.select('#my_dataviz').selectAll('svg').remove(); // Clear existing SVG
+
       const margin = { top: 10, right: 10, bottom: 10, left: 10 };
       const width = 450 - margin.left - margin.right;
       const height = 450 - margin.top - margin.bottom;
 
-      // Append the svg object to the body of the page
-      const svg = d3
-        .select('#my_dataviz')
+      const svg = d3.select('#my_dataviz')
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
         .append('g')
-        .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+        .attr('transform', `translate(${width / 2},${height / 2})`);
 
-      // Save the svg reference to the ref variable
-      svgRef.current = svg;
-
-      // Constructs a new cloud layout instance
       const layout = cloud()
         .size([width, height])
-        .words(myWords.map((d) => ({ text: d.word, size: +d.size })))
+        .words(myWords)
         .padding(5)
-        .rotate(0)
-        .fontSize((d) => d.size)
-        .on('end', draw);
+        .rotate(() => 0)
+        .fontSize(d => d.size)
+        .on('end', words => {
+          svg.selectAll('text')
+            .data(words)
+            .enter().append('text')
+            .style('font-size', d => `${d.size}px`)
+            .style('fill', '#FFFFF0')
+            .attr('text-anchor', 'middle')
+            .style('font-family', 'Impact')
+            .attr('transform', d => `translate(${d.x}, ${d.y})rotate(${d.rotate})`)
+            .text(d => d.text);
+        });
 
       layout.start();
-
-      // Draw function
-      function draw(words) {
-        svg
-          .append('g')
-          .attr('transform', 'translate(' + layout.size()[0] / 2 + ',' + layout.size()[1] / 2 + ')')
-          .selectAll('text')
-          .data(words)
-          .enter()
-          .append('text')
-          .style('font-size', (d) => d.size)
-          .style('fill', '#FFA9C4')
-          .attr('text-anchor', 'middle')
-          .style('font-family', 'Impact')
-          .attr('transform', (d) => 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')')
-          .text((d) => d.text);
-      }
     }
-  }, [myWords]); // Re-run the effect when myWords change
+  }, [myWords]);
 
-  return <div id="my_dataviz" />;
+  return <div id="my_dataviz" style={{ backgroundColor: '#051A38'}}/>
 };
 
 export default MyWordCloud;
+
+// blah blah test test blah blah fight fine fight fight good good blah blah test
