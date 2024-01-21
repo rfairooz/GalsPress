@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { collection, addDoc } from 'firebase/firestore'; 
 import { db } from '@/utils/firebase'; 
 
-const Textarea = () => {
+const Textarea = ({ onTextSubmit }) => {
   const [text, setText] = useState("");
 
   const handleChange = (event) => {
@@ -18,7 +18,7 @@ const Textarea = () => {
           content: text,
           timestamp: new Date()
         });
-        console.log('Text submitted to Firestore:', text);
+        onTextSubmit(text); // Call the callback with the text
         setText('');
       } catch (error) {
         console.error('Error adding document to Firestore: ', error);
@@ -35,12 +35,12 @@ const Textarea = () => {
         name={"Womp Womp"}
         placeholder={"Paste Text Here"}
       />
-        <button
-          className=" bg-[#051A3B] absolute hover:bg-[#051A3B]/70 text-white font-bold py-3 px-3 rounded-full mt-2"
-          onClick={handleSubmit}
-        >
-          <FaSearch className='text-2xl'/>
-        </button>
+      <button
+        className=" bg-[#051A3B] absolute hover:bg-[#051A3B]/70 text-white font-bold py-3 px-3 rounded-full mt-2"
+        onClick={handleSubmit}
+      >
+        <FaSearch className='text-2xl'/>
+      </button>
     </div>
   );
 };
