@@ -7,6 +7,7 @@ const Landing = () => {
   return (
     <div className="h-screen w-full bg-gradient-to-r bg-[#051A38] overflow-hidden relative">
 
+
       <Image className="w-full absolute" src={bubbles} />
 
       <div className="text-8xl font-bold z-10 text-[#0E1836] text-center relative">

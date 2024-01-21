@@ -38,6 +38,7 @@ const Textarea = () => {
       <div className="flex justify-end">
         <button
           className="bg-[#051A3B] absolute hover:bg-[#051A3B]/70 text-white font-bold py-3 px-3 rounded-full mt-3 mr-3"
+
           onClick={handleSubmit}
         >
           <FaSearch className='text-2xl'/>
