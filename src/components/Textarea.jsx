@@ -27,7 +27,11 @@ const Textarea = ({ onTextSubmit }) => {
   };
 
   return (
-    <div className="w-full flex flex-row justify-center">
+    <div className="w-full flex flex-col justify-center">
+      <div className='flex justify-center items-center text-white text-center text-xl rounded-xl bg-black w-3/5 ml-24 h-10'>
+        Add text to discover the results 
+      </div>
+      <div className='flex flex-row mt-2'>
       <textarea
         value={text}
         onChange={handleChange}
@@ -35,12 +39,16 @@ const Textarea = ({ onTextSubmit }) => {
         name={"Womp Womp"}
         placeholder={"Paste Text Here"}
       />
-      <button
-        className=" bg-[#051A3B] absolute hover:bg-[#051A3B]/70 text-white font-bold py-3 px-3 rounded-full mt-2"
-        onClick={handleSubmit}
-      >
-        <FaSearch className='text-2xl'/>
-      </button>
+      <div className="flex justify-end">
+        <button
+          className="bg-[#051A3B] absolute hover:bg-[#051A3B]/70 text-white font-bold py-3 px-3 rounded-full mt-3 mr-3"
+
+          onClick={handleSubmit}
+        >
+          <FaSearch className='text-2xl'/>
+        </button>
+        </div>
+        </div>
     </div>
   );
 };
