@@ -5,7 +5,7 @@ import woman from '@/public/landingWoman.svg';
 
 const Landing = () => {
   return (
-    <div className="h-screen w-full bg-gradient-to-r from-[#53A1FB]/50 via-[#81A0FA] to-[#9A93E1]/90 overflow-hidden ">
+    <div className="h-screen w-full  bg-[#051A3B] overflow-hidden ">
         <div className="text-8xl font-bold  text-[#C63B61] text-center">
             GALS PRESS
         </div>
