@@ -2,24 +2,41 @@
 import React from 'react'
 import Textarea from '@/components/Textarea';
 import Image from 'next/image';
-
+import Footer from './Footer';
 // import woman from '@/public/landingWoman.svg';
-import MyWordCloud from '@/data/word-cloud'; 
+import WordCloudComponent from './Word';
 import { useState } from 'react';
 
 import bubbles from '@/public/cyberpunkBackground.svg';
 
 
 const Landing = () => {
-  const [submittedText, setSubmittedText] = useState('');
+  const [wordsubmit, setwordsubmit] = useState('')
+  const [biasScore, setBiasScore] = useState(null);
+
   const handleTextSubmit = (text) => {
-    setSubmittedText(text);
+    setwordsubmit(text)
+    
   };
+  const handleBiasScore = (score) => {
+    setBiasScore(score);
+  };
+  // const handleTextSubmit = async (text) => {
+  //   setwordsubmit(text);
+  //   // Fetch bias score here and update the state
+  //   const response = await fetch(`/api/fetch?text=${text}`, {
+  //     method: "POST",
+  //     body: text
+  //   })
+  //   const score = await response.json()
+  //   console.log(score)
+  //   setBiasScore(score.average_probabilities.probability.Biased);
+    
+  // };
+  
   return (
-    <div className="h-screen w-full bg-gradient-to-r bg-[#051A38] overflow-hidden relative">
-
-
-      <Image className="w-full absolute" src={bubbles} />
+    <div className="h-screen w-full bg-gradient-to-r bg-[#051A38] relative">
+      <Image className="w-full absolute z-0" src={bubbles} />
 <div className='flex justify-center'>
       <div className="border-3 w-2/5 border-[#450315] text-8xl font-bold z-10 text-[#450315]/80 text-center relative mt-4">
         GALS PRESS
@@ -29,13 +46,15 @@ const Landing = () => {
 
       <div className="grid grid-cols-2 items-center mt-14 relative">
         <div className="grid relative ml-20 ">
-        <Textarea onTextSubmit={handleTextSubmit} />
-          {/* <Image className="w-full" src={woman} /> */}
+        <Textarea onTextSubmit={handleTextSubmit} onbiasScore={handleBiasScore} />
         </div>
       </div>
-      <div className="bg-green-200">
-      <MyWordCloud submittedText={submittedText} />
-      </div>
+
+      {/* <div className="">
+        <MyWordCloud submittedText={submittedText} />
+      </div> */}
+      <WordCloudComponent submittedText={wordsubmit} biasScore={biasScore}/>
+      <Footer />
     </div>
   )
 }

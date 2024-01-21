@@ -1,7 +1,7 @@
 import { Noticia_Text } from "next/font/google";
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import Footer from "@/components/Footer";
 const noticia = Noticia_Text({
   subsets: ["latin"],
   display: "swap",

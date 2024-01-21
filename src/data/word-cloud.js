@@ -7,12 +7,24 @@ const MyWordCloud = ({ submittedText }) => {
   const svgRef = useRef();
 
   // Function to process the submitted text into a format for the word cloud
+  // const processTextData = (text) => {
+  //   const wordCounts = {};
+  //   text.split(/\s+/).forEach(word => {
+  //     word = word.toLowerCase();
+  //     wordCounts[word] = (wordCounts[word] || 0) + 1;
+  //   });
+  //   return Object.keys(wordCounts).map(word => ({ text: word, size: wordCounts[word] * 10 })); // Adjust size as needed
+  // };
   const processTextData = (text) => {
     const wordCounts = {};
+    // Split text into words, remove punctuation, and iterate over words
     text.split(/\s+/).forEach(word => {
-      word = word.toLowerCase();
+      // Remove punctuation from each word
+      word = word.toLowerCase().replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
+      // Count words
       wordCounts[word] = (wordCounts[word] || 0) + 1;
     });
+    // Map word counts to desired format
     return Object.keys(wordCounts).map(word => ({ text: word, size: wordCounts[word] * 10 })); // Adjust size as needed
   };
 
@@ -49,7 +61,7 @@ const MyWordCloud = ({ submittedText }) => {
             .data(words)
             .enter().append('text')
             .style('font-size', d => `${d.size}px`)
-            .style('fill', '#69b3a2')
+            .style('fill', '#FFFFF0')
             .attr('text-anchor', 'middle')
             .style('font-family', 'Impact')
             .attr('transform', d => `translate(${d.x}, ${d.y})rotate(${d.rotate})`)
@@ -60,7 +72,9 @@ const MyWordCloud = ({ submittedText }) => {
     }
   }, [myWords]);
 
-  return <div id="my_dataviz" />;
+  return <div id="my_dataviz" style={{ backgroundColor: '#051A38'}}/>
 };
 
 export default MyWordCloud;
+
+// blah blah test test blah blah fight fine fight fight good good blah blah test
