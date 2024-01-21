@@ -4,9 +4,10 @@ export default function WordCloudComponent() {
 
 
   return (
-    <div>
-      <h1>Word Cloud Example</h1>
-      <WordCloud />
+    <div className = "h-screen w-full bg-gradient-to-r bg-[#051A38] overflow-hidden" >
+      <h1 className= "text-6xl text-[#C63B61] text-center ">Word Cloud Example</h1>
+      <div className = "flex justify-center"> <WordCloud />
+      </div>
     </div>
   );
 }

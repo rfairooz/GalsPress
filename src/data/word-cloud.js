@@ -56,7 +56,7 @@ const MyWordCloud = () => {
           .enter()
           .append('text')
           .style('font-size', (d) => d.size)
-          .style('fill', '#69b3a2')
+          .style('fill', '#FFA9C4')
           .attr('text-anchor', 'middle')
           .style('font-family', 'Impact')
           .attr('transform', (d) => 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')')
