@@ -13,6 +13,7 @@ import bubbles from '@/public/cyberpunkBackground.svg';
 const Landing = () => {
   const [wordsubmit, setwordsubmit] = useState('')
   const [biasScore, setBiasScore] = useState(null);
+  const [barScore, setBarScore] = useState(null);
 
   const handleTextSubmit = (text) => {
     setwordsubmit(text)
@@ -20,6 +21,9 @@ const Landing = () => {
   };
   const handleBiasScore = (score) => {
     setBiasScore(score);
+  };
+  const handleBarScore = (barScore) => {
+    setBarScore(barScore);
   };
   // const handleTextSubmit = async (text) => {
   //   setwordsubmit(text);
@@ -46,14 +50,14 @@ const Landing = () => {
 
       <div className="grid grid-cols-2 items-center mt-14 relative">
         <div className="grid relative ml-20 ">
-        <Textarea onTextSubmit={handleTextSubmit} onbiasScore={handleBiasScore} />
+        <Textarea onTextSubmit={handleTextSubmit} onbiasScore={handleBiasScore} onBarScore={handleBarScore}/>
         </div>
       </div>
 
       {/* <div className="">
         <MyWordCloud submittedText={submittedText} />
       </div> */}
-      <WordCloudComponent submittedText={wordsubmit} biasScore={biasScore}/>
+      <WordCloudComponent submittedText={wordsubmit} biasScore={biasScore} barScore={barScore}/>
       <Footer />
     </div>
   )

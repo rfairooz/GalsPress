@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { collection, addDoc } from 'firebase/firestore'; 
 import { db } from '@/utils/firebase'; 
 // import sendAndFetchData from '@/app/api/fetch/route';
-const Textarea = ({ onTextSubmit, onbiasScore }) => {
+const Textarea = ({ onTextSubmit, onbiasScore, onBarScore }) => {
   const [text, setText] = useState("");
   // const [biasScore, setbiasScore] = useState(null);
 
@@ -12,36 +12,36 @@ const Textarea = ({ onTextSubmit, onbiasScore }) => {
     setText(event.target.value);
   };
 
-  async function sendAndFetchData(dataToSend) {
-    // try {
-      // Sending data 
-      const sendResponse = await fetch('https://e8a0-34-148-254-180.ngrok-free.app/run-script', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToSend),
-      });
+  // async function sendAndFetchData(dataToSend) {
+  //   // try {
+  //     // Sending data 
+  //     const sendResponse = await fetch('https://e8a0-34-148-254-180.ngrok-free.app/run-script', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(dataToSend),
+  //     });
 
-      if (!sendResponse.ok) {
-        throw new Error('Error sending data');
-      }
-      console.log('Data being sent to Flask server:', dataToSend);
-      console.log(sendResponse);
+  //     if (!sendResponse.ok) {
+  //       throw new Error('Error sending data');
+  //     }
+  //     console.log('Data being sent to Flask server:', dataToSend);
+  //     console.log(sendResponse);
 
-      // Fetching response
-    //   const fetchResponse = await fetch('http://172.28.0.12:5000/');
+  //     // Fetching response
+  //   //   const fetchResponse = await fetch('http://172.28.0.12:5000/');
 
-    //   if (!fetchResponse.ok) {
-    //     throw new Error('Error fetching data');
-    //   }
+  //   //   if (!fetchResponse.ok) {
+  //   //     throw new Error('Error fetching data');
+  //   //   }
 
-    //   const responseData = await fetchResponse.json();
-    //   console.log('Response from Flask server:', responseData);
-    // } catch (error) {
-    //   console.error('Error:', error.message);
-    // }
-  }
+  //   //   const responseData = await fetchResponse.json();
+  //   //   console.log('Response from Flask server:', responseData);
+  //   // } catch (error) {
+  //   //   console.error('Error:', error.message);
+  //   // }
+  // }
 
   const handleSubmit = async () => {
     if (text.trim() !== '') {
@@ -66,6 +66,7 @@ const Textarea = ({ onTextSubmit, onbiasScore }) => {
 
         const data = await response.json()
         onbiasScore(data.average_probabilities.probability.Biased)
+        onBarScore(data.compound_mean)
 
         console.log(data)
   
@@ -79,7 +80,7 @@ const Textarea = ({ onTextSubmit, onbiasScore }) => {
   return (
     <div className="w-full flex flex-col justify-center">
       <div className='flex justify-center items-center text-white text-center text-xl rounded-xl bg-black w-3/5 ml-24 h-10'>
-        Enter Text To Analyze
+        Enter Text To Analyze & Scroll Down!
       </div>
       <div className='flex flex-row mt-2'>
         <textarea
